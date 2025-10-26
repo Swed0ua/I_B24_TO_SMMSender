@@ -1,9 +1,11 @@
+import os
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
 
-# C22:UC_TULWHN для колонки "Думає отримав презентацію"
+load_dotenv()
 
 app = Flask(__name__)
-webhook_url = 'https://smartkasa.bitrix24.eu/rest/9306/7brcqjy7xef7f69j/'
+webhook_url = os.getenv('WEBHOOK_URL', '')
 
 def get_info_about_lead(id):
     _method = 'crm.deal.add.json'
@@ -27,4 +29,6 @@ def webhook():
     return jsonify({"status": "success"}), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+    host = os.getenv('FLASK_HOST', '0.0.0.0')
+    port = int(os.getenv('FLASK_PORT', '5001'))
+    app.run(host=host, port=port)

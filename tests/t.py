@@ -1,7 +1,10 @@
 import requests
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
-webhook_url = 'https://smartkasa.bitrix24.eu/rest/9306/2t1phn72pwwh3t3p/'
+webhook_url = os.getenv('WEBHOOK_URL', '')
 
 def get_list_element_by_id(id):
     _method = 'lists.element.get.json'
