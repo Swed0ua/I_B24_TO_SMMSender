@@ -130,7 +130,8 @@ class AlphaSMS:
         """
 
         text = text.replace("\\n", "\n")
-
+        sms_text = sms_text.replace("\\n", "\n")
+        
         new_id = datetime.now().strftime("%Y%m%d%H%M%S%f") + str(random.randint(1000, 9999))
         payload = {
             "type": "viber+sms",
